@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:video_call/main.dart';
 import 'package:video_call/video_call/widgets/common/app_bar/recording_indicator.dart';
 import 'package:videosdk/videosdk.dart';
 
@@ -17,12 +18,11 @@ class MeetingAppBar extends StatefulWidget {
   final String recordingState;
   final bool isFullScreen;
   const MeetingAppBar(
-      {Key? key,
+      {super.key,
       required this.meeting,
       required this.token,
       required this.isFullScreen,
-      required this.recordingState})
-      : super(key: key);
+      required this.recordingState});
 
   @override
   State<MeetingAppBar> createState() => MeetingAppBarState();
@@ -53,60 +53,32 @@ class MeetingAppBarState extends State<MeetingAppBar> {
         firstChild: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (widget.recordingState == "RECORDING_STARTING" ||
-                  widget.recordingState == "RECORDING_STOPPING" ||
-                  widget.recordingState == "RECORDING_STARTED")
-                RecordingIndicator(recordingState: widget.recordingState),
-              if (widget.recordingState == "RECORDING_STARTING" ||
-                  widget.recordingState == "RECORDING_STOPPING" ||
-                  widget.recordingState == "RECORDING_STARTED")
-                const HorizontalSpacer(),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          widget.meeting.id,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        // GestureDetector(
-                        //   child: const Padding(
-                        //     padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                        //     child: Icon(
-                        //       Icons.copy,
-                        //       size: 16,
-                        //     ),
-                        //   ),
-                        //   onTap: () {
-                        //     Clipboard.setData(
-                        //         ClipboardData(text: widget.meeting.id));
-                        //     showSnackBarMessage(
-                        //         message: "Meeting ID has been copied.",
-                        //         context: context);
-                        //   },
-                        // ),
-                      ],
-                    ),
-                    // VerticalSpacer(),
-                    Center(
-                      child: Text(
-                        elapsedTime == null
-                            ? "00:00:00"
-                            : elapsedTime.toString().split(".").first,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: black400),
-                      ),
-                    )
-                  ],
+              //err IconButton(onPressed: ()=>
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => const MyHomePage(isCallIsRunning: true,)),
+              //     )
+              //     , icon: Icon(Icons.arrow_back_ios,color: Colors.white)),
+              // if (widget.recordingState == "RECORDING_STARTING" ||
+              //     widget.recordingState == "RECORDING_STOPPING" ||
+              //     widget.recordingState == "RECORDING_STARTED")
+              //   RecordingIndicator(recordingState: widget.recordingState),
+              // if (widget.recordingState == "RECORDING_STARTING" ||
+              //     widget.recordingState == "RECORDING_STOPPING" ||
+              //     widget.recordingState == "RECORDING_STARTED")
+              //   const HorizontalSpacer(),
+              Center(
+                child: Text(
+                  elapsedTime == null
+                      ? "00:00:00"
+                      : elapsedTime.toString().split(".").first,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: black400),
                 ),
               ),
               IconButton(

@@ -99,140 +99,125 @@ class _OneToOneMeetingScreenState extends State<OneToOneMeetingScreen> {
     //Get statusbar height
     final statusbarHeight = MediaQuery.of(context).padding.top;
 
-    return Stack(
-      children: [
-        WillPopScope(
-          onWillPop: _onWillPopScope,
-          child: _joined
-              ? SafeArea(
-                  child: Scaffold(
-                      backgroundColor: black800,
-                      body: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          MeetingAppBar(
-                            meeting: meeting,
-                            token: widget.token,
-                            recordingState: recordingState,
-                            isFullScreen: fullScreen,
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                                onDoubleTap: () => {
-                                      setState(() {
-                                        fullScreen = !fullScreen;
-                                      })
-                                    },
-                                child: OneToOneMeetingContainer(meeting: meeting)),
-                          ),
-                          AnimatedCrossFade(
-                            duration: const Duration(milliseconds: 300),
-                            crossFadeState: !fullScreen
-                                ? CrossFadeState.showFirst
-                                : CrossFadeState.showSecond,
-                            secondChild: const SizedBox.shrink(),
-                            firstChild: MeetingActionBar(
-                              isMicEnabled: audioStream != null,
-                              isCamEnabled: videoStream != null,
+    return WillPopScope(
+      onWillPop: _onWillPopScope,
+      child: _joined
+          ? SafeArea(
+              child: Scaffold(
+                  backgroundColor: black800,
+                  body: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      MeetingAppBar(
+                        meeting: meeting,
+                        token: widget.token,
+                        recordingState: recordingState,
+                        isFullScreen: fullScreen,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                            onDoubleTap: () => {
+                                  setState(() {
+                                    fullScreen = !fullScreen;
+                                  })
+                                },
+                            child: OneToOneMeetingContainer(meeting: meeting)),
+                      ),
+                      AnimatedCrossFade(
+                        duration: const Duration(milliseconds: 300),
+                        crossFadeState: !fullScreen
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                        secondChild: const SizedBox.shrink(),
+                        firstChild: MeetingActionBar(
+                          isMicEnabled: audioStream != null,
+                          isCamEnabled: videoStream != null,
 
-                              isScreenShareEnabled: shareStream != null,
-                              recordingState: recordingState,
-                              // Called when Call End button is pressed
-                              onCallEndButtonPressed: () {
-                                meeting.end();
-                              },
+                          isScreenShareEnabled: shareStream != null,
+                          recordingState: recordingState,
+                          // Called when Call End button is pressed
+                          onCallEndButtonPressed: () {
+                            meeting.end();
+                          },
 
-                              onCallLeaveButtonPressed: () {
-                                meeting.leave();
-                              },
-                              // Called when mic button is pressed
-                              onMicButtonPressed: () {
-                                if (audioStream != null) {
-                                  meeting.muteMic();
-                                } else {
-                                  meeting.unmuteMic();
-                                }
-                              },
-                              // Called when camera button is pressed
-                              onCameraButtonPressed: () async{
-                                if (videoStream != null) {
-                                  meeting.disableCam();
-                                } else {
-                                 await meeting.enableCam();
+                          onCallLeaveButtonPressed: () {
+                            meeting.leave();
+                          },
+                          // Called when mic button is pressed
+                          onMicButtonPressed: () {
+                            if (audioStream != null) {
+                              meeting.muteMic();
+                            } else {
+                              meeting.unmuteMic();
+                            }
+                          },
+                          // Called when camera button is pressed
+                          onCameraButtonPressed: () async{
+                            if (videoStream != null) {
+                              meeting.disableCam();
+                            } else {
+                             await meeting.enableCam();
 
-                                  //check its from camera
-                                  String?  frontDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("front")).toList().firstOrNull?.deviceId;
-                                  String? selectedCamId =meeting.selectedCamId;
+                              //check its from camera
+                              String?  frontDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("front")).toList().firstOrNull?.deviceId;
+                              String? selectedCamId =meeting.selectedCamId;
 
-                                  if (selectedCamId != frontDeviceId && frontDeviceId!= null) {
-                                     meeting.changeCam(frontDeviceId);
-                                  }
-                                }
-                              },
+                              if (selectedCamId != frontDeviceId && frontDeviceId!= null) {
+                                 meeting.changeCam(frontDeviceId);
+                              }
+                            }
+                          },
 
-                              onSwitchMicButtonPressed: (details) async {
-                                List<MediaDeviceInfo> outptuDevice =
-                                    meeting.getAudioOutputDevices();
-                                double bottomMargin = (70.0 * outptuDevice.length);
-                                final screenSize = MediaQuery.of(context).size;
-                                await showMenu(
-                                  context: context,
-                                  color: black700,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  position: RelativeRect.fromLTRB(
-                                    screenSize.width - details.globalPosition.dx,
-                                    details.globalPosition.dy - bottomMargin,
-                                    details.globalPosition.dx,
-                                    (bottomMargin),
-                                  ),
-                                  items: outptuDevice.map((e) {
-                                    return PopupMenuItem(
-                                        value: e, child: Text(e.label));
-                                  }).toList(),
-                                  elevation: 8.0,
-                                ).then((value) {
-                                  if (value != null) {
-                                    meeting.switchAudioDevice(value);
-                                  }
-                                });
-                              }, isBackCamera: true, onChangeCameraButtonPressed: () {
+                          onSwitchMicButtonPressed: (details) async {
+                            List<MediaDeviceInfo> outptuDevice =
+                                meeting.getAudioOutputDevices();
+                            double bottomMargin = (70.0 * outptuDevice.length);
+                            final screenSize = MediaQuery.of(context).size;
+                            await showMenu(
+                              context: context,
+                              color: black700,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              position: RelativeRect.fromLTRB(
+                                screenSize.width - details.globalPosition.dx,
+                                details.globalPosition.dy - bottomMargin,
+                                details.globalPosition.dx,
+                                (bottomMargin),
+                              ),
+                              items: outptuDevice.map((e) {
+                                return PopupMenuItem(
+                                    value: e, child: Text(e.label));
+                              }).toList(),
+                              elevation: 8.0,
+                            ).then((value) {
+                              if (value != null) {
+                                meeting.switchAudioDevice(value);
+                              }
+                            });
+                          }, isBackCamera: true, onChangeCameraButtonPressed: () {
 
 
-                             String?  frontDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("front")).toList().firstOrNull?.deviceId;
-                             String?  backDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("back")).toList().firstOrNull?.deviceId;
-String? selectedCamId =meeting.selectedCamId;
-String? deviceId=selectedCamId==frontDeviceId ? backDeviceId:frontDeviceId;
-                             if (deviceId != null) {
-                               meeting.changeCam(deviceId);
-                             }
-                            },
+                         String?  frontDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("front")).toList().firstOrNull?.deviceId;
+                         String?  backDeviceId=meeting.getCameras().where((element) => element.label.toLowerCase().contains("back")).toList().firstOrNull?.deviceId;
+    String? selectedCamId =meeting.selectedCamId;
+    String? deviceId=selectedCamId==frontDeviceId ? backDeviceId:frontDeviceId;
+                         if (deviceId != null) {
+                           meeting.changeCam(deviceId);
+                         }
+                        },
 
-                            ),
-                          ),
-                        ],
-                      )),
-                )
-              : _moreThan2Participants
-                  ?
-         //:
-          ParticipantLimitReached(
-                      meeting: meeting,
-                    )
-                 : const WaitingToJoin(),
-        ),
-        IconButton(onPressed: ()=>
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MyHomePage(isCallIsRunning: true,)),
+                        ),
+                      ),
+                    ],
+                  )),
             )
-            , icon: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Icon(Icons.arrow_back_ios,color: Colors.white),
-          ),
-        ))
-      ],
+          : _moreThan2Participants
+              ?
+     //:
+      ParticipantLimitReached(
+                  meeting: meeting,
+                )
+             : const WaitingToJoin(),
     );
   }
 

@@ -43,9 +43,26 @@ class MyHomePage extends StatelessWidget {
 final bool isCallIsRunning;
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      color: Colors.white,
-      child: VideocallManager.callWidget(context,isCallIsRunning:isCallIsRunning),
+    return  Scaffold(
+      body: SafeArea(
+        child: Stack(
+
+          children: [
+            Center(child: VideocallManager.callWidget(context,isCallIsRunning:isCallIsRunning)),
+            if(isCallIsRunning)
+              GestureDetector(
+                onTap: ()=>Navigator.pop(context),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 60,
+                  width: double.infinity,
+                  color: Colors.red,
+                  child:  Text("return to call".toUpperCase(),style: const TextStyle(fontWeight: FontWeight.w900,color: Colors.black54),),
+                ),
+              )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -50,6 +50,13 @@ dev_dependencies:
   get:
   touch_ripple_effect:
   flutter_svg:
+  # Awesome plugins
+  awesome_notifications_core: ^0.9.0 # use teh latest version available
+  awesome_notifications: any # <- dis version will be managed by core plugin
+  awesome_notifications_fcm: any # <- this version will be managed by core plugin
+
+  # Firebase plugins
+  firebase_core:  # use the latest available
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -145,26 +145,26 @@ class MeetingActionBar extends StatelessWidget {
             ),
           ),
 
-          //cahangeCamera
-          TouchRippleEffect(
-            borderRadius: BorderRadius.circular(12),
-            rippleColor: primaryColor,
-            onTap: onChangeCameraButtonPressed,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: secondaryColor),
-                color: isBackCamera ? primaryColor : Colors.white,
-              ),
-              padding: const EdgeInsets.all(10),
-              child: SvgPicture.asset(
-               "assets/images/change-camera.svg",
-                width: 26,
-                height: 26,
-                color: isBackCamera ? Colors.white : primaryColor,
-              ),
-            ),
-          ),
+          // //cahangeCamera
+          // TouchRippleEffect(
+          //   borderRadius: BorderRadius.circular(12),
+          //   rippleColor: primaryColor,
+          //   onTap: onChangeCameraButtonPressed,
+          //   child: Container(
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(12),
+          //       border: Border.all(color: secondaryColor),
+          //       color: isBackCamera ? primaryColor : Colors.white,
+          //     ),
+          //     padding: const EdgeInsets.all(10),
+          //     child: SvgPicture.asset(
+          //      "assets/images/change-camera.svg",
+          //       width: 26,
+          //       height: 26,
+          //       color: isBackCamera ? Colors.white : primaryColor,
+          //     ),
+          //   ),
+          // ),
 
         ],
       ),
