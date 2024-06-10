@@ -9,6 +9,7 @@ import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:video_call/firebase_options.dart';
 
 class PushNotificationManager {
   /// Singletone
@@ -23,18 +24,20 @@ class PushNotificationManager {
   ///     INITIALIZATION METHODS
   ///  *********************************************
 
-  static Future<void> initializeRemoteNotifications({
+   Future<void> initializeRemoteNotifications({
     required bool debug
   }) async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    AwesomeNotifications().requestPermissionToSendNotifications();
+
     await AwesomeNotificationsFcm().initialize(
-        onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
-        onFcmTokenHandle: NotificationController.myFcmTokenHandle,
-        onNativeTokenHandle: NotificationController.myNativeTokenHandle,
+        onFcmSilentDataHandle: PushNotificationManager.mySilentDataHandle,
+        onFcmTokenHandle: PushNotificationManager.myFcmTokenHandle,
+        onNativeTokenHandle: PushNotificationManager.myNativeTokenHandle,
         // This license key is necessary only to remove the watermark for
         // push notifications in release mode. To no more about it, please
         // visit http://awesome-notifications.carda.me#prices
-        licenseKey: null,
+        // licenseKey: null,
         debug: debug);
   }
 
@@ -54,12 +57,7 @@ class PushNotificationManager {
       print("FOREGROUND");
     }
 
-    print("starting long task");
-    await Future.delayed(Duration(seconds: 4));
-    final url = Uri.parse("http://google.com");
-    final re = await http.get(url);
-    print(re.body);
-    print("long task done");
+
   }
 
   /// Use dis method to detect when a new fcm token is received

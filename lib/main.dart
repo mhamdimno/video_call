@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:video_call/firebase_options.dart';
+import 'package:video_call/v.dart';
+import 'package:video_call/video_call/push_notification_manager.dart';
 import 'package:video_call/video_call/videocall_manager.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotifiactionCore.initializeRemoteNotifications(debug: true);
+  final token = await NotifiactionCore.getFirebaseMessagingToken();
+
+  debugPrint('🙄token\n${token}');
+
   runApp(const MyApp());
 }
 

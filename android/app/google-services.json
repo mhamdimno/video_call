@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "1054978412335",
+    "project_id": "videocalltest-4a82b",
+    "storage_bucket": "videocalltest-4a82b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054978412335:android:d27c2dc1e130f9367f9bda",
+        "android_client_info": {
+          "package_name": "com.example.video_call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8lNaRTSFq2uGH6lYjWdk0H1PniA7_OSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1054978412335-f40fdnu3o0uvo0roveakd87rgsb4tqjp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lockersuites.door"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054978412335:android:5353411e61adb89a7f9bda",
+        "android_client_info": {
+          "package_name": "com.lockersuites.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8lNaRTSFq2uGH6lYjWdk0H1PniA7_OSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1054978412335-f40fdnu3o0uvo0roveakd87rgsb4tqjp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lockersuites.door"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054978412335:android:5e30188e948735f07f9bda",
+        "android_client_info": {
+          "package_name": "com.lockersuites.door"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8lNaRTSFq2uGH6lYjWdk0H1PniA7_OSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054978412335-0iva34rs97m0p7ns646vjsgpf86d2e6o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1054978412335-f40fdnu3o0uvo0roveakd87rgsb4tqjp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lockersuites.door"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
